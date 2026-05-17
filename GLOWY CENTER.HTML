@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1150">
+    <title>Glowy Center | قائمة الخدمات والأسعار</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --rose: #be185d;
+            --rose-light: #db2777;
+            --rose-dark: #831843;
+            --rose-pale: #fce7f3;
+            --rose-softest: #fdf2f8;
+            --rose-medium: #f9a8d4;
+            --white: #ffffff;
+            --ink: #1a0a12;
+            --ink-soft: #4a2535;
+            --muted: #9d7a8a;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--rose-softest);
+            color: var(--ink);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── TRANSLATION UTILS ─── */
+        .en-txt { display: none; }
+        body.en-mode .ar-txt { display: none; }
+        body.en-mode .en-txt { display: inline-block; }
+        span.en-txt { display: none; }
+        body.en-mode span.en-txt { display: inline; }
+        
+        body.en-mode .row-price { text-align: right; }
+        body.en-mode .row-price::after { content: ' EGP'; }
+        
+        /* ─── NAVBAR ─── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(190,24,93,0.12);
+        }
+
+        .nav-inner {
+            width: 1100px; /* تم تثبيتها كوضع سطح المكتب */
+            margin: 0 auto;
+            padding: 0.9rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 1.75rem;
+            color: var(--rose-dark);
+            letter-spacing: 0.04em;
+            line-height: 1;
+        }
+
+        .brand span {
+            display: block;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 600;
+            color: var(--muted);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        /* Social Icons */
+        .socials { display: flex; align-items: center; gap: 0.55rem; }
+
+        .soc-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            flex-shrink: 0;
+        }
+
+        .soc-btn:hover {
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+        }
+
+        .soc-btn svg { width: 18px; height: 18px; }
+
+        .soc-fb   { background: #1877F2; }
+        .soc-ig   { background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7); }
+        .soc-tt   { background: #010101; }
+        .soc-wa   { background: #25D366; }
+        .soc-gift { background: linear-gradient(135deg, var(--rose), var(--rose-dark)); }
+        
+        .soc-lang {
+            background: var(--ink-soft);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(155deg, #fff5fb 0%, #fce7f3 45%, #f9d0e8 100%);
+            padding: 5rem 1.5rem 4rem;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -120px; right: -120px;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(219,39,119,0.18) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -100px; left: -80px;
+            width: 320px; height: 320px;
+            background: radial-gradient(circle, rgba(190,24,93,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--rose-light);
+            background: rgba(219,39,119,0.08);
+            border: 1px solid rgba(219,39,119,0.2);
+            border-radius: 100px;
+            padding: 0.35rem 1.1rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700;
+            color: var(--rose-dark);
+            line-height: 1.05;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero-rule {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--rose), transparent);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .hero-sub {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--rose-dark);
+            margin-bottom: 0.4rem;
+        }
+
+        .hero-tagline {
+            font-size: 0.8rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-weight: 400;
+        }
+
+        /* ─── WELCOME CARD ─── */
+        .welcome-wrap {
+            width: 860px; /* تم التثبيت كوضع سطح المكتب */
+            margin: -2.5rem auto 0;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .welcome-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(190,24,93,0.1), 0 4px 16px rgba(0,0,0,0.06);
+            border: 1px solid rgba(219,39,119,0.1);
+        }
+
+        .welcome-card h2 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--rose-dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .welcome-card p {
+            color: var(--ink-soft);
+            font-size: 1rem;
+            line-height: 1.9;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .welcome-card p strong { color: var(--rose); }
+
+        /* ─── MAIN ─── */
+        main {
+            width: 1000px; /* تم التثبيت كوضع سطح المكتب */
+            margin: 0 auto;
+            padding: 4rem 1.5rem 5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        /* ─── SECTION HEADER ─── */
+        .section-head {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .section-pip {
+            width: 4px;
+            height: 36px;
+            background: linear-gradient(to bottom, var(--rose-light), var(--rose-dark));
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .section-head h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--rose-dark);
+            line-height: 1.2;
+        }
+
+        .section-head h3 em {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1.15rem;
+            color: var(--rose-light);
+            margin-right: 0.4rem;
+        }
+        
+        body.en-mode .section-head h3 em {
+            margin-right: 0;
+            margin-left: 0.4rem;
+        }
+
+        /* ─── TABLE CARD ─── */
+        .table-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(190,24,93,0.08), 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid rgba(219,39,119,0.08);
+        }
+
+        .table-head {
+            display: grid;
+            background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+            padding: 1rem 1.4rem;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        .table-head.cols-2 { grid-template-columns: 1fr auto; }
+
+        .table-row {
+            display: grid;
+            padding: 1rem 1.4rem;
+            align-items: center;
+            transition: background 0.2s;
+            border-bottom: 1px solid rgba(219,39,119,0.07);
+        }
+
+        .table-row:last-child { border-bottom: none; }
+        .table-row.cols-2 { grid-template-columns: 1fr auto; gap: 1rem; }
+        .table-row:hover { background: #fdf0f7; }
+        .table-row.alt { background: rgba(249,168,212,0.06); }
+        .table-row.alt:hover { background: #fdf0f7; }
+
+        .row-name {
+            font-size: 0.97rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.4;
+        }
+
+        .row-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--rose);
+            white-space: nowrap;
+            text-align: left;
+        }
+
+        .row-price::after {
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--muted);
+            vertical-align: super;
+            margin-right: 2px;
+        }
+        
+        body.en-mode .row-price::after {
+            margin-right: 0;
+            margin-left: 2px;
+        }
+
+        /* ─── MINI CARDS ─── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* تثبيت ظهور الكروت الثلاثة بجانب بعضها دائماً */
+            gap: 1rem;
+        }
+
+        .mini-card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 1.6rem 1rem;
+            text-align: center;
+            border: 1px solid rgba(219,39,119,0.09);
+            box-shadow: 0 4px 20px rgba(190,24,93,0.07);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mini-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--rose-light), var(--rose-dark));
+        }
+
+        .mini-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(190,24,93,0.14);
+        }
+
+        .mini-icon {
+            width: 52px; height: 52px;
+            background: linear-gradient(135deg, var(--rose-pale), rgba(219,39,119,0.08));
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 0.9rem;
+            color: var(--rose);
+        }
+
+        .mini-icon svg { width: 24px; height: 24px; }
+
+        .mini-name {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+        }
+
+        .mini-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--rose);
+            line-height: 1;
+        }
+
+        .mini-price span {
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--muted);
+            display: block;
+            margin-top: 3px;
+        }
+
+        /* ─── FRIENDS SECTION ─── */
+        .friends-card {
+            background: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%);
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            color: #fff;
+        }
+
+        .friends-card::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 250px; height: 250px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 50%;
+        }
+
+        .friends-card::after {
+            content: '';
+            position: absolute;
+            bottom: -80px; left: -40px;
+            width: 200px; height: 200px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .friends-inner {
+            position: relative;
+            z-index: 2;
+            padding: 2.5rem 2rem;
+        }
+
+        .friends-head {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .friends-emoji {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+
+        .friends-head h3 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 0.4rem;
+        }
+
+        .friends-head p {
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .friends-head p strong { opacity: 1; font-weight: 800; }
+
+        .friends-table {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.18);
+        }
+
+        .friends-table-head {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            background: rgba(255,255,255,0.15);
+            padding: 0.8rem 1.4rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .friends-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            padding: 1rem 1.4rem;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            transition: background 0.2s;
+            gap: 1rem;
+        }
+
+        .friends-row:last-child { border-bottom: none; }
+        .friends-row:hover { background: rgba(255,255,255,0.07); }
+        .friends-row.alt { background: rgba(255,255,255,0.04); }
+
+        .friends-row .row-name { color: rgba(255,255,255,0.92); font-size: 0.92rem; }
+
+        .friends-row .row-price {
+            color: #fce7f3;
+            text-align: left;
+        }
+        
+        body.en-mode .friends-row .row-price { text-align: right; }
+
+        .friends-row .row-price::after { color: rgba(252,231,243,0.6); }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: #fff;
+            border-top: 1px solid rgba(219,39,119,0.1);
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--rose-dark);
+            letter-spacing: 0.04em;
+            margin-bottom: 0.3rem;
+        }
+
+        .footer-tag {
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .footer-soc {
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .footer-soc:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .footer-soc svg { width: 18px; height: 18px; }
+
+        /* ─── ANIMATIONS ─── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-up { animation: fadeUp 0.7s ease-out forwards; opacity: 0; }
+        .d1 { animation-delay: 0.05s; }
+        .d2 { animation-delay: 0.15s; }
+        .d3 { animation-delay: 0.25s; }
+        .d4 { animation-delay: 0.35s; }
+        .d5 { animation-delay: 0.45s; }
+        .d6 { animation-delay: 0.55s; }
+        .d7 { animation-delay: 0.65s; }
+        .d8 { animation-delay: 0.75s; }
+
+        /* تم حذف أكواد الـ Media Queries الخاصة بالموبايل نهائياً للحفاظ على مظهر سطح المكتب */
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <div class="brand">
+            Glowy Center
+            <span>Beauty &amp; Skin Care</span>
+        </div>
+        <div class="socials">
+            <button onclick="toggleLang()" class="soc-btn soc-lang" title="ترجمة | Translate">
+                <span class="ar-txt">EN</span>
+                <span class="en-txt">عربي</span>
+            </button>
+            <a href="https://www.facebook.com/share/1BozV2sdcV/" target="_blank" rel="noopener" class="soc-btn soc-fb" title="Facebook">
+                <svg fill="#fff" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/glowy2222?igsh=MWx3eHYyMzc5ZDNoOQ==" target="_blank" rel="noopener" class="soc-btn soc-ig" title="Instagram">
+                <svg fill="#fff" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@glowy1517?_r=1&_t=ZS-96DxsmXH7lF" target="_blank" rel="noopener" class="soc-btn soc-tt" title="TikTok">
+                <svg fill="#fff" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+            <a href="https://wa.me/qr/EVMSXBV2NUQGM1" target="_blank" rel="noopener" class="soc-btn soc-wa" title="WhatsApp">
+                <svg fill="#fff" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+            <a href="https://drive.google.com/drive/folders/1zVv3yBIG83WVrZfRp_QKJOT5Uxl8Q-h7" target="_blank" rel="noopener" class="soc-btn soc-gift" title="العروض الخاصة | Special Offers">
+                <svg fill="#fff" viewBox="0 0 24 24" stroke="none"><path d="M20 12v10H4V12M22 7H2v5h20V7zM12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-inner fade-up d1">
+        <div class="hero-eyebrow">
+            <span class="ar-txt">قائمة الخدمات والأسعار الرسمية</span>
+            <span class="en-txt">Official Services & Prices List</span>
+        </div>
+        <h1>Glowy Center</h1>
+        <div class="hero-rule"></div>
+        <p class="hero-sub">
+            <span class="ar-txt">كل جمالك في مكان واحد</span>
+            <span class="en-txt">All Your Beauty in One Place</span>
+        </p>
+        <p class="hero-tagline">All Your Beauty in One Place</p>
+    </div>
+</section>
+
+<div class="welcome-wrap fade-up d2">
+    <div class="welcome-card">
+        <h2>
+            <span class="ar-txt">أهلاً بكِ في عالمكِ الخاص ✨</span>
+            <span class="en-txt">Welcome to Your Special World ✨</span>
+        </h2>
+        <p>
+            <span class="ar-txt">في <strong>Glowy Center</strong>، نؤمن أن جمالكِ يبدأ من العناية بالتفاصيل. نوفر لكِ أحدث التقنيات الطبية والتجميلية لنضمن لكِ بشرة مشرقة وصحية دائماً.</span>
+            <span class="en-txt">At <strong>Glowy Center</strong>, we believe your beauty starts with the details. We provide the latest medical and cosmetic technologies to ensure you always have glowing, healthy skin.</span>
+        </p>
+    </div>
+</div>
+
+<main>
+
+    <section class="fade-up d3">
+        <div class="section-head">
+            <div class="section-pip"></div>
+            <h3>
+                <span class="ar-txt">جلسات التنظيف الأساسية <em>Facial Care</em></span>
+                <span class="en-txt">Basic Facial Care</span>
+            </h3>
+        </div>
+        <div class="cards-grid">
+            <div class="mini-card">
+                <div class="mini-icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                </div>
+                <div class="mini-name">
+                    <span class="ar-txt">ديرمابلاننج</span>
+                    <span class="en-txt">Dermaplaning</span>
+                </div>
+                <div class="mini-price">100<span><span class="ar-txt">جنيه</span><span class="en-txt">EGP</span></span></div>
+            </div>
+            <div class="mini-card">
+                <div class="mini-icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div class="mini-name">
+                    <span class="ar-txt">تنظيف بشرة عادي</span>
+                    <span class="en-txt">Normal Facial</span>
+                </div>
+                <div class="mini-price">300<span><span class="ar-txt">جنيه</span><span class="en-txt">EGP</span></span></div>
+            </div>
+            <div class="mini-card">
+                <div class="mini-icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                </div>
+                <div class="mini-name">
+                    <span class="ar-txt">تنظيف بشرة عميق</span>
+                    <span class="en-txt">Deep Facial</span>
+                </div>
+                <div class="mini-price">350<span><span class="ar-txt">جنيه</span><span class="en-txt">EGP</span></span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fade-up d3">
+        <div class="section-head">
+            <div class="section-pip"></div>
+            <h3>
+                <span class="ar-txt">التنظيف العلاجي المتخصص</span>
+                <span class="en-txt">Therapeutic Facial Care</span>
+            </h3>
+        </div>
+        <div class="table-card">
+            <div class="table-head cols-2">
+                <div><span class="ar-txt">الخدمة</span><span class="en-txt">Service</span></div>
+                <div><span class="ar-txt">السعر</span><span class="en-txt">Price</span></div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name">
+                    <span class="ar-txt">تنظيف بشرة علاجي - مستوى 1</span>
+                    <span class="en-txt">Therapeutic Facial - Level 1</span>
+                </div>
+                <div class="row-price">500</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name">
+                    <span class="ar-txt">تنظيف بشرة علاجي - مستوى ٢</span>
+                    <span class="en-txt">Therapeutic Facial - Level 2</span>
+                </div>
+                <div class="row-price">600</div>
+            </div>
+            <div class="table-row cols-2 alt">
+                <div class="row-name">
+                    <span class="ar-txt">علاج حب الشباب والحبوب الفطرية</span>
+                    <span class="en-txt">Acne & Fungal Acne Treatment</span>
+                </div>
+                <div class="row-price">450</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name">
+                    <span class="ar-txt">جلسة معالجة الأكسدة وتجديد البشرة</span>
+                    <span class="en-txt">Antioxidation & Skin Renewal</span>
+                </div>
+                <div class="row-price">400</div>
+            </div>
+            <div class="table-row cols-2 alt">
+                <div class="row-name">
+                    <span class="ar-txt">جلسة Glow up</span>
+                    <span class="en-txt">Glow Up Session</span>
+                </div>
+                <div class="row-price">450</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fade-up d4">
+        <div class="section-head">
+            <div class="section-pip"></div>
+            <h3>
+                <span class="ar-txt">خدمات الديرمابين المتخصصة <em>Dermapen</em></span>
+                <span class="en-txt">Derma Pen Services</span>
+            </h3>
+        </div>
+        <div class="table-card">
+            <div class="table-head cols-2">
+                <div><span class="ar-txt">الخدمة</span><span class="en-txt">Service</span></div>
+                <div><span class="ar-txt">السعر</span><span class="en-txt">Price</span></div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name">
+                    <span class="ar-txt">ديرمابين مسام وندبات وعلاج عميق</span>
+                    <span class="en-txt">Pores, Scars & Deep Treatment</span>
+                </div>
+                <div class="row-price">950</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name">
+                    <span class="ar-txt">ديرمابين آثار حبوب</span>
+                    <span class="en-txt">Acne Scars Treatment</span>
+                </div>
+                <div class="row-price">700</div>
+            </div>
+            <div class="table-row cols-2 alt">
+                <div class="row-name">
+                    <span class="ar-txt">ديرمابين نضارة وتفتيح</span>
+                    <span class="en-txt">Freshness & Brightening</span>
+                </div>
+                <div class="row-price">500</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name">
+                    <span class="ar-txt">ديرمابين إنبات شعر</span>
+                    <span class="en-txt">Hair Growth Treatment</span>
+                </div>
+                <div class="row-price">400</div>
+            </div>
+            <div class="table-row cols-2 alt">
+                <div class="row-name">
+                    <span class="ar-txt">ديرما بن صلع وراثي</span>
+                    <span class="en-txt">Genetic Baldness Treatment</span>
+                </div>
+                <div class="row-price">600</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name">
+                    <span class="ar-txt">ديرمابن كثافة وترطيب الفروة</span>
+                    <span class="en-txt">Scalp Density & Hydration</span>
+                </div>
+                <div class="row-price">700</div>
+            </div>
+            <div class="table-row cols-2 alt">
+                <div class="row-name">
+                    <span class="ar-txt">ديرمابين للايد</span>
+                    <span class="en-txt">Hands Treatment</span>
+                </div>
+                <div class="row-price">400</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name">
+                    <span class="ar-txt">ديرمابين شفايف</span>
+                    <span class="en-txt">Lips Treatment</span>
+                </div>
+                <div class="row-price">250</div>
+            </div>
+            <div class="table-row cols-2 alt">
+                <div class="row-name">
+                    <span class="ar-txt">ديرمابين هالات</span>
+                    <span class="en-txt">Dark Circles Treatment</span>
+                </div>
+                <div class="row-price">200</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fade-up d5">
+        <div class="section-head">
+            <div class="section-pip"></div>
+            <h3>
+                <span class="ar-txt">خدمات التقشير البارد <em>Cold Peeling</em></span>
+                <span class="en-txt">Cold Peeling Services</span>
+            </h3>
+        </div>
+        <div class="table-card">
+            <div class="table-head cols-2">
+                <div><span class="ar-txt">المنطقة</span><span class="en-txt">Target Area</span></div>
+                <div><span class="ar-txt">السعر</span><span class="en-txt">Price</span></div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name"><span class="ar-txt">تقشير بارد للرجل كاملة</span><span class="en-txt">Full Legs Peeling</span></div>
+                <div class="row-price">2500</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name"><span class="ar-txt">تقشير بارد للظهر</span><span class="en-txt">Back Peeling</span></div>
+                <div class="row-price">1500</div>
+            </div>
+            <div class="table-row cols-2 alt">
+                <div class="row-name"><span class="ar-txt">تقشير بارد للذراعين</span><span class="en-txt">Arms Peeling</span></div>
+                <div class="row-price">1000</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name"><span class="ar-txt">تقشير ألقدم</span><span class="en-txt">Feet Peeling</span></div>
+                <div class="row-price">600</div>
+            </div>
+            <div class="table-row cols-2 alt">
+                <div class="row-name"><span class="ar-txt">تقشير بارد لليدين</span><span class="en-txt">Hands Peeling</span></div>
+                <div class="row-price">500</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name"><span class="ar-txt">معالجة كعب الرجل / القدم</span><span class="en-txt">Heel & Foot Treatment</span></div>
+                <div class="row-price">400</div>
+            </div>
+            <div class="table-row cols-2 alt">
+                <div class="row-name"><span class="ar-txt">تقشير وتفتيح الركبة</span><span class="en-txt">Knee Peeling & Brightening</span></div>
+                <div class="row-price">330</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name"><span class="ar-txt">تقشير بارد للرقبة</span><span class="en-txt">Neck Peeling</span></div>
+                <div class="row-price">300</div>
+            </div>
+            <div class="table-row cols-2 alt">
+                <div class="row-name"><span class="ar-txt">تفتيح الهالات</span><span class="en-txt">Dark Circles Brightening</span></div>
+                <div class="row-price">300</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name"><span class="ar-txt">تفتيح وترطيب الكوع</span><span class="en-txt">Elbow Brightening & Hydration</span></div>
+                <div class="row-price">200</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fade-up d6">
+        <div class="section-head">
+            <div class="section-pip"></div>
+            <h3>
+                <span class="ar-txt">خدمات التقشير الكيميائي <em>Chemical Peeling</em></span>
+                <span class="en-txt">Chemical Peeling Services</span>
+            </h3>
+        </div>
+        <div class="table-card">
+            <div class="table-head cols-2">
+                <div><span class="ar-txt">المنطقة</span><span class="en-txt">Target Area</span></div>
+                <div><span class="ar-txt">السعر</span><span class="en-txt">Price</span></div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name"><span class="ar-txt">تقشير وتفتيح الرجل كامله</span><span class="en-txt">Full Legs Peeling & Brightening</span></div>
+                <div class="row-price">1000</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name"><span class="ar-txt">تقشير الضهر</span><span class="en-txt">Back Peeling</span></div>
+                <div class="row-price">700</div>
+            </div>
+            <div class="table-row cols-2 alt">
+                <div class="row-name"><span class="ar-txt">تقشير الذراعين</span><span class="en-txt">Arms Peeling</span></div>
+                <div class="row-price">500</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name"><span class="ar-txt">تقشير كف الإيد</span><span class="en-txt">Hands Peeling</span></div>
+                <div class="row-price">300</div>
+            </div>
+            <div class="table-row cols-2 alt">
+                <div class="row-name"><span class="ar-txt">تفتيح القدم</span><span class="en-txt">Feet Brightening</span></div>
+                <div class="row-price">300</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name"><span class="ar-txt">تقشير الرقبة</span><span class="en-txt">Neck Peeling</span></div>
+                <div class="row-price">270</div>
+            </div>
+            <div class="table-row cols-2 alt">
+                <div class="row-name"><span class="ar-txt">تقشير وتفتيح الركبة</span><span class="en-txt">Knee Peeling & Brightening</span></div>
+                <div class="row-price">200</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name"><span class="ar-txt">تقشير وترطيب الكوع</span><span class="en-txt">Elbow Peeling & Hydration</span></div>
+                <div class="row-price">100</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fade-up d7">
+        <div class="section-head">
+            <div class="section-pip"></div>
+            <h3>
+                <span class="ar-txt">العناية بالجسم والمناطق الحساسة</span>
+                <span class="en-txt">Body Care & Brightening</span>
+            </h3>
+        </div>
+        <div class="table-card">
+            <div class="table-head cols-2">
+                <div><span class="ar-txt">الخدمة</span><span class="en-txt">Service</span></div>
+                <div><span class="ar-txt">السعر</span><span class="en-txt">Price</span></div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name"><span class="ar-txt">تفتيح البكيني (خدمة ذاتية)</span><span class="en-txt">Bikini Brightening (Self Service)</span></div>
+                <div class="row-price">800</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name"><span class="ar-txt">جلسة تنظيف وترطيب الظهر</span><span class="en-txt">Back Cleansing & Hydration</span></div>
+                <div class="row-price">400</div>
+            </div>
+            <div class="table-row cols-2 alt">
+                <div class="row-name"><span class="ar-txt">جلسة جلد الوزة</span><span class="en-txt">Strawberry Skin Treatment</span></div>
+                <div class="row-price">400</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name"><span class="ar-txt">تفتيح الاندر ارم</span><span class="en-txt">Underarm Brightening</span></div>
+                <div class="row-price">350</div>
+            </div>
+            <div class="table-row cols-2 alt">
+                <div class="row-name"><span class="ar-txt">جلسة معالجة كعب الرجل من التشقق</span><span class="en-txt">Cracked Heels Treatment</span></div>
+                <div class="row-price">300</div>
+            </div>
+            <div class="table-row cols-2">
+                <div class="row-name"><span class="ar-txt">جلسة ترطيب وتفتيح الذراع</span><span class="en-txt">Arm Hydration & Brightening</span></div>
+                <div class="row-price">300</div>
+            </div>
+            <div class="table-row cols-2 alt">
+                <div class="row-name"><span class="ar-txt">جلسة تنظيف وترطيب الإيد</span><span class="en-txt">Hand Cleansing & Hydration</span></div>
+                <div class="row-price">200</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fade-up d8">
+        <div class="friends-card">
+            <div class="friends-inner">
+                <div class="friends-head">
+                    <span class="friends-emoji">👭</span>
+                    <h3>
+                        <span class="ar-txt">عروض الصحاب</span>
+                        <span class="en-txt">Friends Offer</span>
+                    </h3>
+                    <p>
+                        <span class="ar-txt">شاركي الجمال مع صديقتك المفضلة <strong>(للفردين معاً)</strong></span>
+                        <span class="en-txt">Share beauty with your best friend <strong>(Price for two)</strong></span>
+                    </p>
+                </div>
+                <div class="friends-table">
+                    <div class="friends-table-head">
+                        <div><span class="ar-txt">الجلسة</span><span class="en-txt">Session</span></div>
+                        <div><span class="ar-txt">السعر الإجمالي</span><span class="en-txt">Total Price</span></div>
+                    </div>
+                    <div class="friends-row">
+                        <div class="row-name"><span class="ar-txt">تنظيف بشرة عادي</span><span class="en-txt">Normal Facial</span></div>
+                        <div class="row-price">400</div>
+                    </div>
+                    <div class="friends-row">
+                        <div class="row-name"><span class="ar-txt">تنظيف بشرة عميق</span><span class="en-txt">Deep Facial</span></div>
+                        <div class="row-price">500</div>
+                    </div>
+                    <div class="friends-row alt">
+                        <div class="row-name"><span class="ar-txt">تنظيف بشرة علاجي – مستوى 1</span><span class="en-txt">Therapeutic Facial - Level 1</span></div>
+                        <div class="row-price">700</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-logo">Glowy Center</div>
+    <p class="footer-tag">All Your Beauty in One Place</p>
+    <div class="footer-socials">
+        <a href="https://www.facebook.com/share/1BozV2sdcV/" target="_blank" class="footer-soc soc-fb">
+            <svg fill="#fff" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/glowy2222?igsh=MWx3eHYyMzc5ZDNoOQ==" target="_blank" class="footer-soc soc-ig">
+            <svg fill="#fff" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@glowy1517" target="_blank" class="footer-soc soc-tt">
+            <svg fill="#fff" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        </a>
+        <a href="https://wa.me/qr/EVMSXBV2NUQGM1" target="_blank" class="footer-soc soc-wa">
+            <svg fill="#fff" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+    </div>
+</footer>
+
+<script>
+    // دالة تغيير اللغة بين العربية والإنجليزية بسلاسة
+    function toggleLang() {
+        document.body.classList.toggle('en-mode');
+        
+        if(document.body.classList.contains('en-mode')) {
+            document.documentElement.dir = 'ltr';
+            document.documentElement.lang = 'en';
+        } else {
+            document.documentElement.dir = 'rtl';
+            document.documentElement.lang = 'ar';
+        }
+    }
+</script>
+
+</body>
+</html>
